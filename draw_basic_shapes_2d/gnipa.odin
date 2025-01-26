@@ -21,8 +21,8 @@ import rl "vendor:raylib"
 //------------------------------------------------------------------------------------
 main :: proc()
 {
-	screenWidth := 800;
-	screenHeight := 450;
+	screenWidth : i32 = 800;
+	screenHeight : i32 = 450;
 
     rl.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - basic shapes drawing");
 
@@ -54,23 +54,23 @@ main :: proc()
             rl.DrawCircleLines(screenWidth/5, 340, 80, rl.DARKBLUE);
 
             // Rectangle shapes and lines
-            rl.DrawRectangle(screenWidth/4*2 - 60, 100, 120, 60, RED);
+            rl.DrawRectangle(screenWidth/4*2 - 60, 100, 120, 60, rl.RED);
             rl.DrawRectangleGradientH(screenWidth/4*2 - 90, 170, 180, 130, rl.MAROON, rl.GOLD);
             rl.DrawRectangleLines(screenWidth/4*2 - 40, 320, 80, 60, rl.ORANGE);  // NOTE: Uses QUADS internally, not lines
 
             // Triangle shapes and lines
-            rl.DrawTriangle((Vector2){ screenWidth/4.0 *3.0, 80.0 },
-                         (Vector2){ screenWidth/4.0 *3.0 - 60.0, 150.0 },
-                         (Vector2){ screenWidth/4.0 *3.0 + 60.0, 150.0 }, rl.VIOLET);
+            rl.DrawTriangle({ f32(screenWidth)/4.0 *3.0, 80.0 },
+                         { f32(screenWidth)/4.0 *3.0 - 60.0, 150.0 },
+                         { f32(screenWidth)/4.0 *3.0 + 60.0, 150.0 }, rl.VIOLET);
 
-            rl.DrawTriangleLines((Vector2){ screenWidth/4.0*3.0, 160.0 },
-                              (Vector2){ screenWidth/4.0*3.0 - 20.0, 230.0 },
-                              (Vector2){ screenWidth/4.0*3.0 + 20.0, 230.0 }, rl.DARKBLUE);
+            rl.DrawTriangleLines({f32(screenWidth)/4.0*3.0, 160.0 },
+                              { f32(screenWidth)/4.0*3.0 - 20.0, 230.0 },
+                              { f32(screenWidth)/4.0*3.0 + 20.0, 230.0 }, rl.DARKBLUE);
 
             // Polygon shapes and lines
-            rl.DrawPoly((Vector2){ screenWidth/4.0*3, 330 }, 6, 80, rotation, rl.BROWN);
-            rl.DrawPolyLines((Vector2){ screenWidth/4.0*3, 330 }, 6, 90, rotation, rl.BROWN);
-            rl.DrawPolyLinesEx((Vector2){ screenWidth/4.0*3, 330 }, 6, 85, rotation, 6, rl.BEIGE);
+            rl.DrawPoly({ f32(screenWidth)/4.0*3, 330 }, 6, 80, f32(rotation), rl.BROWN);
+            rl.DrawPolyLines({ f32(screenWidth)/4.0*3, 330 }, 6, 90, f32(rotation), rl.BROWN);
+            rl.DrawPolyLinesEx({ f32(screenWidth)/4.0*3, 330 }, 6, 85, f32(rotation), 6, rl.BEIGE);
 
             // NOTE: We draw all LINES based shapes together to optimize internal drawing,
             // this way, all LINES are rendered in a single draw pass
