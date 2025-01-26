@@ -1,3 +1,4 @@
+package Gnipahellir
 /*******************************************************************************************
 *
 *   raylib [shapes] example - Draw basic shapes 2d (rectangle, circle, line...)
@@ -13,76 +14,76 @@
 *
 ********************************************************************************************/
 
-#include "raylib.h"
+import rl "vendor:raylib"
 
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
-int main(void)
+main :: proc()
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+	screenWidth := 800;
+		screenHeight := 450;
 
     InitWindow(screenWidth, screenHeight, "raylib [shapes] example - basic shapes drawing");
 
-    float rotation = 0.0f;
+    rotation := 0.0
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    rl.SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    for (!rl.WindiwShouldClose())    // Detect window close button or ESC key
     {
         // Update
         //----------------------------------------------------------------------------------
-        rotation += 0.2f;
+        rotation += 0.2;
         //----------------------------------------------------------------------------------
 
         // Draw
         //----------------------------------------------------------------------------------
-        BeginDrawing();
+        rl.BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+          rl.ClearBackground(RAYWHITE);
 
-            DrawText("some basic shapes available on raylib", 20, 20, 20, DARKGRAY);
+
+            rl.DrawText("some basic shapes available on raylib", 20, 20, 20, DARKGRAY);
 
             // Circle shapes and lines
-            DrawCircle(screenWidth/5, 120, 35, DARKBLUE);
-            DrawCircleGradient(screenWidth/5, 220, 60, GREEN, SKYBLUE);
-            DrawCircleLines(screenWidth/5, 340, 80, DARKBLUE);
+            rl.DrawCircle(screenWidth/5, 120, 35, DARKBLUE);
+            rl.DrawCircleGradient(screenWidth/5, 220, 60, GREEN, SKYBLUE);
+            rl.DrawCircleLines(screenWidth/5, 340, 80, DARKBLUE);
 
             // Rectangle shapes and lines
-            DrawRectangle(screenWidth/4*2 - 60, 100, 120, 60, RED);
-            DrawRectangleGradientH(screenWidth/4*2 - 90, 170, 180, 130, MAROON, GOLD);
-            DrawRectangleLines(screenWidth/4*2 - 40, 320, 80, 60, ORANGE);  // NOTE: Uses QUADS internally, not lines
+            rl.DrawRectangle(screenWidth/4*2 - 60, 100, 120, 60, RED);
+            rl.DrawRectangleGradientH(screenWidth/4*2 - 90, 170, 180, 130, MAROON, GOLD);
+            rl.DrawRectangleLines(screenWidth/4*2 - 40, 320, 80, 60, ORANGE);  // NOTE: Uses QUADS internally, not lines
 
             // Triangle shapes and lines
-            DrawTriangle((Vector2){ screenWidth/4.0f *3.0f, 80.0f },
+            rl.DrawTriangle((Vector2){ screenWidth/4.0f *3.0f, 80.0f },
                          (Vector2){ screenWidth/4.0f *3.0f - 60.0f, 150.0f },
                          (Vector2){ screenWidth/4.0f *3.0f + 60.0f, 150.0f }, VIOLET);
 
-            DrawTriangleLines((Vector2){ screenWidth/4.0f*3.0f, 160.0f },
+            rl.DrawTriangleLines((Vector2){ screenWidth/4.0f*3.0f, 160.0f },
                               (Vector2){ screenWidth/4.0f*3.0f - 20.0f, 230.0f },
                               (Vector2){ screenWidth/4.0f*3.0f + 20.0f, 230.0f }, DARKBLUE);
 
             // Polygon shapes and lines
-            DrawPoly((Vector2){ screenWidth/4.0f*3, 330 }, 6, 80, rotation, BROWN);
-            DrawPolyLines((Vector2){ screenWidth/4.0f*3, 330 }, 6, 90, rotation, BROWN);
-            DrawPolyLinesEx((Vector2){ screenWidth/4.0f*3, 330 }, 6, 85, rotation, 6, BEIGE);
+            rl.DrawPoly((Vector2){ screenWidth/4.0f*3, 330 }, 6, 80, rotation, BROWN);
+            rl.DrawPolyLines((Vector2){ screenWidth/4.0f*3, 330 }, 6, 90, rotation, BROWN);
+            rl.DrawPolyLinesEx((Vector2){ screenWidth/4.0f*3, 330 }, 6, 85, rotation, 6, BEIGE);
 
             // NOTE: We draw all LINES based shapes together to optimize internal drawing,
             // this way, all LINES are rendered in a single draw pass
-            DrawLine(18, 42, screenWidth - 18, 42, BLACK);
-        EndDrawing();
+            rl.DrawLine(18, 42, screenWidth - 18, 42, BLACK);
+        rl.EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    rl.CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
-    return 0;
 }
