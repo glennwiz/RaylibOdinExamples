@@ -24,8 +24,11 @@ main :: proc() {
 		// nil, bang, nil
 		// nil, nil, bang
 		raylib.BeginDrawing()
-		for i in 0 ..< x_cell_count {
-			for n: i32 = 0; n < y_cell_count; n += 1 {
+		for x: i32 = 5; x < x_cell_count; x += 5 { 	//valid, i autoincrement 
+
+			raylib.DrawLine(x, SCREEN_HEIGHT)
+
+			for n: i32 = 0; n < y_cell_count; n += 1 { 	//valid
 			}
 		}
 		raylib.EndDrawing()
