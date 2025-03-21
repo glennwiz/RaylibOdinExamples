@@ -23,14 +23,7 @@ main :: proc() {
 		raylib.ClearBackground(raylib.GRAY)
 
 		the_grid()
-		run_rule_30 :: proc() {
-
-			// bang, nil, nil
-			// nil, bang, bang
-			// nil, bang, nil
-			// nil, nil, bang
-
-		}
+		run_rule_30()
 		raylib.EndDrawing()
 	}
 }
@@ -46,4 +39,17 @@ the_grid :: proc() {
 			raylib.DrawLine(0, cell_size * x, SCREEN_HEIGHT, cell_size * x, raylib.BLACK)
 		}
 	}
+}
+
+run_rule_30 :: proc() {
+
+
+	// https://en.wikipedia.org/wiki/Rule_30
+	// bang, nil, nil
+	// nil, bang, bang
+	// nil, bang, nil
+	// nil, nil, bang
+
+	//DrawRectangle               :: proc(posX, posY: c.int, width, height: c.int, color: Color) ---
+	raylib.DrawRectangle(SCREEN_WIDTH / 2, 0, cell_size, cell_size, raylib.BLACK)
 }
