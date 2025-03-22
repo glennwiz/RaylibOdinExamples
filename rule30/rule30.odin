@@ -41,6 +41,7 @@ the_grid :: proc() {
 	}
 }
 
+run_count: i32 = 10
 run_rule_30 :: proc() {
 
 
@@ -52,4 +53,18 @@ run_rule_30 :: proc() {
 
 	//DrawRectangle               :: proc(posX, posY: c.int, width, height: c.int, color: Color) ---
 	raylib.DrawRectangle(SCREEN_WIDTH / 2, 0, cell_size, cell_size, raylib.BLACK)
+
+	//we need a temp lookup grid i belive with false, false, true, false that holds the stat of the line above
+	for i: i32 = 1; i < run_count; i += 1 {
+
+		row_loc := cell_size * i
+		//line down the middle -> raylib.DrawRectangle(SCREEN_WIDTH / 2, row_loc, cell_size, cell_size, raylib.BLACK)
+
+		column_loc := SCREEN_WIDTH / cell_size
+
+		for y: i32 = 1; i < column_loc; y += 1 {
+
+
+		}
+	}
 }
