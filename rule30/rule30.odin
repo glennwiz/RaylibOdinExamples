@@ -40,6 +40,7 @@ the_grid :: proc() {
 		}
 	}
 }
+
 GRID :: [2][dynamic]bool
 grids: GRID
 
@@ -57,7 +58,10 @@ run_rule_30 :: proc() {
 	//DrawRectangle               :: proc(posX, posY: c.int, width, height: c.int, color: Color) ---
 	raylib.DrawRectangle(SCREEN_WIDTH / 2, 0, cell_size, cell_size, raylib.BLACK)
 
-	//we two temp lookup grids i belive with that can hold bool, that holds the stat of the line above[0] and updates the line we are updating[1]
+
+	//we two temp lookup grids i belive with that can hold bool, that holds the stat of the line above[0] and updates the line we are on [1]
+	//we swap [0] with [1] and clear the new [1] after every update.
+
 	for i: i32 = 1; i < run_count; i += 1 {
 
 		row_loc := cell_size * i
