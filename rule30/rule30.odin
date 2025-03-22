@@ -42,9 +42,9 @@ the_grid :: proc() {
 }
 
 GRID :: [2][dynamic]bool
-grids: GRID
+grid: GRID
 
-run_count: i32 = 10
+run_count: i32 = 10 //this is how many times we do the line above calc
 
 run_rule_30 :: proc() {
 
@@ -57,6 +57,12 @@ run_rule_30 :: proc() {
 
 	//DrawRectangle               :: proc(posX, posY: c.int, width, height: c.int, color: Color) ---
 	raylib.DrawRectangle(SCREEN_WIDTH / 2, 0, cell_size, cell_size, raylib.BLACK)
+
+	//create the grid
+	grid[0] = make([dynamic]bool, x_cell_count)
+	grid[1] = make([dynamic]bool, x_cell_count)
+
+	//seed the grid
 
 
 	//we two temp lookup grids i belive with that can hold bool, that holds the stat of the line above[0] and updates the line we are on [1]
