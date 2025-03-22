@@ -16,6 +16,13 @@ main :: proc() {
 	raylib.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Rule30")
 	defer (raylib.CloseWindow())
 
+	//create the grid
+	grid[0] = make([dynamic]bool, x_cell_count)
+	grid[1] = make([dynamic]bool, x_cell_count)
+
+	//seed the grid
+	middle_seed := x_cell_count / 2
+	grid[0][middle_seed] = true
 
 	for !raylib.WindowShouldClose() {
 
@@ -58,26 +65,7 @@ run_rule_30 :: proc() {
 	//DrawRectangle               :: proc(posX, posY: c.int, width, height: c.int, color: Color) ---
 	raylib.DrawRectangle(SCREEN_WIDTH / 2, 0, cell_size, cell_size, raylib.BLACK)
 
-	//create the grid
-	grid[0] = make([dynamic]bool, x_cell_count)
-	grid[1] = make([dynamic]bool, x_cell_count)
-
-	//seed the grid
-
-
+	fmt.println(x_cell_count, x_cell_count / 2)
 	//we two temp lookup grids i belive with that can hold bool, that holds the stat of the line above[0] and updates the line we are on [1]
 	//we swap [0] with [1] and clear the new [1] after every update.
-
-	for i: i32 = 1; i < run_count; i += 1 {
-
-		row_loc := cell_size * i
-		//line down the middle -> raylib.DrawRectangle(SCREEN_WIDTH / 2, row_loc, cell_size, cell_size, raylib.BLACK)
-
-		column_loc := SCREEN_WIDTH / cell_size
-
-		for y: i32 = 1; i < column_loc; y += 1 {
-
-
-		}
-	}
 }
