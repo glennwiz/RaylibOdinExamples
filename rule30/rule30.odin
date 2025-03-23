@@ -1,71 +1,83 @@
 package rule30
 
 import "core:fmt"
-import "vendor:raylib"
+import rl "vendor:raylib"
 
-SCREEN_WIDTH :: 800
-SCREEN_HEIGHT :: 800
+SCREEN_WIDTH :: 1024
+SCREEN_HEIGHT :: 768
 
-cell_size: i32 = 20
+cell_size: i32 = 2
 x_cell_count := SCREEN_WIDTH / cell_size
 y_cell_count := SCREEN_HEIGHT / cell_size
 
+Grid :: [dynamic][dynamic]bool
+grid: Grid
+
+current_generation: i32 = 0
+
 main :: proc() {
-	fmt.println("Gnipahellir")
+	fmt.println("Rule 30")
 
-	raylib.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Rule30")
-	defer (raylib.CloseWindow())
+	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Rule30")
+	defer rl.CloseWindow()
 
-	//create the grid
-	grid[0] = make([dynamic]bool, x_cell_count)
-	grid[1] = make([dynamic]bool, x_cell_count)
+	grid = make([dynamic][dynamic]bool, y_cell_count)
+	for i in 0 ..< y_cell_count {
+		grid[i] = make([dynamic]bool, x_cell_count)
+	}
 
-	//seed the grid
 	middle_seed := x_cell_count / 2
 	grid[0][middle_seed] = true
+	current_generation = 1
 
-	for !raylib.WindowShouldClose() {
-
-		raylib.BeginDrawing()
-		raylib.ClearBackground(raylib.GRAY)
+	for !rl.WindowShouldClose() {
+		rl.BeginDrawing()
+		rl.ClearBackground(rl.GRAY)
 
 		the_grid()
-		run_rule_30()
-		raylib.EndDrawing()
+		draw_cells()
+		if current_generation < y_cell_count {
+			run_rule_30()
+			current_generation += 1
+		}
+		rl.EndDrawing()
 	}
 }
 
 the_grid :: proc() {
+	for x in 0 ..= x_cell_count {
+		rl.DrawLine(x * cell_size, 0, x * cell_size, SCREEN_HEIGHT, rl.BLACK)
+	}
+	for y in 0 ..= y_cell_count {
+		rl.DrawLine(0, y * cell_size, SCREEN_WIDTH, y * cell_size, rl.BLACK)
+	}
+}
 
-	for x: i32 = 1; x < x_cell_count; x += 1 {
-
-		//DrawLine :: proc(startPosX, startPosY, endPosX, endPosY: c.int, color: Color) ---
-		raylib.DrawLine(cell_size * x, 0, cell_size * x, SCREEN_HEIGHT, raylib.BLACK)
-
-		for n: i32 = 0; n < y_cell_count; n += 1 {
-			raylib.DrawLine(0, cell_size * x, SCREEN_HEIGHT, cell_size * x, raylib.BLACK)
+draw_cells :: proc() {
+	for y in 0 ..< current_generation {
+		for x in 0 ..< x_cell_count {
+			if grid[y][x] {
+				rl.DrawRectangle(x * cell_size, y * cell_size, cell_size, cell_size, rl.BLACK)
+			}
 		}
 	}
 }
 
-GRID :: [2][dynamic]bool
-grid: GRID
-
-run_count: i32 = 10 //this is how many times we do the line above calc
-
 run_rule_30 :: proc() {
-
-
 	// https://en.wikipedia.org/wiki/Rule_30
-	// bang, nil, nil
-	// nil, bang, bang
-	// nil, bang, nil
-	// nil, nil, bang
 
-	//DrawRectangle               :: proc(posX, posY: c.int, width, height: c.int, color: Color) ---
-	raylib.DrawRectangle(SCREEN_WIDTH / 2, 0, cell_size, cell_size, raylib.BLACK)
+	prev_row := current_generation - 1
+	current_row := current_generation
 
-	fmt.println(x_cell_count, x_cell_count / 2)
-	//we two temp lookup grids i belive with that can hold bool, that holds the stat of the line above[0] and updates the line we are on [1]
-	//we swap [0] with [1] and clear the new [1] after every update.
+	for x in 0 ..< x_cell_count {
+		left := x > 0 ? grid[prev_row][x - 1] : false
+		current := grid[prev_row][x]
+		right := x < x_cell_count - 1 ? grid[prev_row][x + 1] : false
+
+		grid[current_row][x] =
+			(!left && current && right) ||
+			(left && !current && !right) ||
+			(!left && current && !right) ||
+			(!left && !current && right)
+	}
 }
